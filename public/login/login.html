@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Signup</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-box">
+            <h2 id="form-title">Login</h2>
+
+            <form id="login-form">
+
+                <div class="input-group" id="name-group" style="display: none;">
+                    <label for="name"> Full Name:</label>
+                    <input type="text" id="name">
+                </div>
+
+                <div class="input-group" id="roll-code-group" style="display: none;">
+                    <label for="roll-code"> Id-Code: </label>
+                    <input type="number" id="roll-code">
+                </div>
+
+                <div class="input-group">
+                    <label for="email"> Email: </label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+
+                <button type="submit" id="submit-btn">Login</button>
+
+                <br>
+                <br>
+
+                <p class="toggle-text">
+                    <span id="toggle-text" style="color: black;">Don't have an account? </span>
+                    <a href="#" id="toggle-link" style="color: red;">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

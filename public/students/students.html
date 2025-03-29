@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="../navigation.css">
+    <link rel="stylesheet" href="students.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <a href="../home/home.html"><img src="https://cdn-icons-png.flaticon.com/512/2421/2421066.png" alt="Library Logo" class="logo"></a>
+            <h1>Library Management</h1>
+            <div class="menu-btn" onclick="toggleMenu()">☰</div>
+        </div>
+        <div class="user-info" id="user-info">
+            <span id="user-id" onclick="toggleUserMenu()">User123</span>
+            <div id="user-menu" class="user-menu">
+                <ul>
+                    <li><a href="../home/home.html" onclick="showProfile()">Profile</a></li>
+                    <li><a href="../login/login.html" onclick="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        function toggleMenu() {
+            const leftSection = document.getElementById('left');
+            leftSection.classList.toggle('active'); // Use 'active' class to control visibility
+        }
+
+        // Toggle User Menu
+        function toggleUserMenu() {
+            const menu = document.getElementById('user-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+    <!-- Main Section -->
+    <div class="main-container">
+        <!-- Left Section -->
+        <aside class="left-section" id="left">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../dashboard/home.html" onclick="showDashboard()"> Dashboard </a></li>
+                <li><a href="../books/books.html" onclick="manageBooks()"> Manage Books </a></li>
+                <li><a href="../students/students.html" onclick="manageStudents()" class="active">Manage Students</a></li>
+                <li><a href="../fine/fine-details.html" onclick="fineCollected()">Fine Collected</a></li>
+            </ul>
+        </aside>
+
+        <!-- Right Section (Dynamic content) -->
+        <section class="right-section" id="right-section">
+            <div class="container">
+                <h1 id="page-title">Manage Students Records</h1>
+
+                <!-- Search for stack/book-code/name -->
+                <div class="controls">
+                    <label for="search-input">Search for the student:</label>
+                    <input type="text" id="search-input" placeholder="Search by Roll-Code or Name" oninput="filterRecords()">
+                </div>
+        
+                <!-- Items Per Page Dropdown -->
+                <div class="controls">
+                    <label for="items-per-page">Items per page:</label>
+                    <select id="items-per-page">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                    </select>
+                </div>
+        
+                <!-- Book Table -->
+                <table id="books-table">
+                    <thead>
+                        <tr>
+                            <th>Student Id</th>
+                            <th>Name</th>
+                            <th>Book Code</th>
+                            <th>Book Title</th>
+                            <th>Issue Date</th>
+                            <th>Return Date</th>
+                            <th>Fine</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="record-table-body">
+                        <!-- Rows will be inserted here -->
+                    </tbody>
+                </table>
+        
+                <!-- Pagination Controls -->
+                <div class="pagination">
+                    <button class="btn" id="prev-btn" onclick="changePage(-1)">Prev</button>
+                    <span id="page-info">Page 1</span>
+                    <button class="btn" id="next-btn" onclick="changePage(1)">Next</button>
+                </div>
+
+                <div>
+                    <form class="issue-info-form">
+                        <div class="form-control">
+                            <h3 class="heading"> Add a Book Issue Record </h3>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-control">
+                                <label for="stud-roll-code"> Student-RollCode : </label>
+                                <input type="number" name="stud-roll-code" id="stud-roll-code" min="100001" max="999999">
+                            </div>
+                            <div class="form-control">
+                                <label for="stud-name"> Student-Name : </label>
+                                <input type="text" name="stud-name" id="stud-name">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-control">
+                                <label for="book-code"> Book-Code : </label>
+                                <input type="number" name="book-code" id="book-code" min="1001" max="9999">
+                            </div>
+                            <div class="form-control">
+                                <label for="book-name"> Book-Name : </label>
+                                <input type="text" name="book-name" id="book-name">
+                            </div>
+                            <div><button class="check" onclick="BookCheck()"> Check </button></div>
+                        </div>
+                        
+                        <br>
+                        
+                        <button class="add-record-btn" type="submit"> Add New Record </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="students.js"></script>
+</body>
+</html>
+

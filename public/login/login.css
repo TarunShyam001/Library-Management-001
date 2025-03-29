@@ -1,0 +1,90 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background: 
+        url('https://thomasguignard.photo/wp-content/uploads/sites/6/2018/02/timtom-web-2557.jpg') no-repeat center center fixed, 
+        linear-gradient(135deg, #00f7ff, #00ffff);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 350px;
+}
+
+.form-box {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 92%;
+    padding: 10px;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.59);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent input */
+    color: #fff; /* White text */
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    background: #667eea;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #5a67d8;
+}
+
+.toggle-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #fff; /* White text */
+}
+
+.toggle-text a {
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.toggle-text a:hover {
+    text-decoration: underline;
+}

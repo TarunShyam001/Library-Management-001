@@ -1,0 +1,155 @@
+
+/* Container */
+.container {
+    max-width: 900px; /* Increase max-width for a more spacious layout */
+    width: 100%; /* Allow it to take full width available inside the container */
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex; /* Ensure the container can work with flexbox */
+    flex-direction: column; /* Stack the child elements vertically */
+    gap: 20px; /* Add gap between child elements */
+}
+
+/* Page Title */
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.controls label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.controls input {
+    width: 320px;
+    padding: 5px;
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    border: 1px solid #d6fcfe;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.controls select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Book Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #0073e6;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Pagination Controls */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+}
+
+#prev-btn, #next-btn {
+    padding: 10px 15px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#prev-btn:disabled, #next-btn:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+#prev-btn:hover, #next-btn:hover {
+    background-color: #005bb5;
+}
+
+#page-info {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Heading for Total Fine Collected */
+.heading {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: #d63031;
+    margin-top: 10px;
+}
+
+.heading span {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+
+/* Make sure everything looks good on smaller screens */
+@media (max-width: 868px) {
+    .container {
+        padding: 15px; /* Adjust padding inside the container */
+    }
+
+    .page-title {
+        font-size: 20px; /* Slightly smaller title */
+    }
+
+    .controls {
+        flex-direction: row;
+    }
+
+    .controls input {
+        width: 200px;
+    }
+
+    .controls select {
+        width: 60px; /* Make select full width on smaller screens */
+    }
+
+    .pagination {
+        flex-direction: row; /* Stack pagination buttons vertically */
+        gap: 10px;
+    }
+
+    #prev-btn, #next-btn {
+        width: 100px; /* Make buttons full width on small screens */
+    }
+}

@@ -1,0 +1,2 @@
+
+// Students.belongsTo(Users);

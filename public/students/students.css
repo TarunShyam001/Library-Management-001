@@ -1,0 +1,259 @@
+
+/* Container */
+.container {
+    max-width: 900px; /* Increase max-width for a more spacious layout */
+    width: 100%; /* Allow it to take full width available inside the container */
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex; /* Ensure the container can work with flexbox */
+    flex-direction: column; /* Stack the child elements vertically */
+    gap: 20px; /* Add gap between child elements */
+}
+
+/* Page Title */
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.controls label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.controls input {
+    width: 320px;
+    padding: 5px;
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    border: 1px solid #d6fcfe;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.controls select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Book Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #0073e6;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#return-button {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    height: 25px;
+    width: 60px;
+    background-color: aquamarine;
+    color: #cc0000;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#return-button:hover {
+    height: 35px;
+    width: 70px;
+    color: aquamarine;
+    background-color: #cc0000;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Pagination Controls */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+}
+
+#prev-btn, #next-btn {
+    padding: 10px 15px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#prev-btn:disabled, #next-btn:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+#prev-btn:hover, #next-btn:hover {
+    background-color: #005bb5;
+}
+
+#page-info {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Add-Records */
+.issue-info-form {
+    width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    text-align: center;
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-control {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.form-control input,
+.form-control select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-control select {
+    cursor: pointer;
+}
+
+/* Check-Button */
+.check {
+    margin-top: 10px;
+    padding: 10px 10px;
+    background-color: aqua;
+    color: rgb(255, 82, 2);
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    align-self: center; /* Ensures the button aligns properly inside .form-row */
+}
+
+.check:hover {
+    background-color: rgb(255, 82, 2);
+    color: aquamarine;
+}
+
+/* Ensure the button fits properly inside .form-row */
+.form-row .check {
+    margin-top: 25px;
+    height: 42px; /* Match the height of input fields */
+}
+
+/* Add-Button */
+.add-record-btn {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-record-btn:hover {
+    background: #0056b3;
+}
+
+/* Make sure everything looks good on smaller screens */
+@media (max-width: 868px) {
+    .container {
+        padding: 15px; /* Adjust padding inside the container */
+    }
+
+    .page-title {
+        font-size: 20px; /* Slightly smaller title */
+    }
+
+    .controls {
+        flex-direction: row;
+    }
+
+    .controls input {
+        width: 200px;
+    }
+
+    .controls select {
+        width: 60px; /* Make select full width on smaller screens */
+    }
+
+    .pagination {
+        flex-direction: row; /* Stack pagination buttons vertically */
+        gap: 10px;
+    }
+
+    #prev-btn, #next-btn {
+        width: 100px; /* Make buttons full width on small screens */
+    }
+
+    .issue-info-form {
+        width: 80%;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
