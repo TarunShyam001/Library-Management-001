@@ -8,7 +8,7 @@ const User = sequelize.define('user', {
     allowNull : false,
     primaryKey : true
   },
-  name: {
+  username: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -27,10 +27,6 @@ const User = sequelize.define('user', {
   isAdmin : {
     type : Sequelize.BOOLEAN,
     allowNull : false
-  },
-  totalFinePaid : {
-    type : Sequelize.FLOAT,
-    defaultValue : 0
   }
 });
 

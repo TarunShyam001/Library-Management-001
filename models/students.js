@@ -64,6 +64,22 @@ const Students = sequelize.define('students', {
         }
         return null;  // If 'createdAt' is null, return null
       }
+    }, 
+    fine: {
+      type: Sequelize.VIRTUAL(Sequelize.INTEGER),  // Specifies that this is a virtual field with a numeric type (FLOAT)
+      get() {
+        const createdAt = this.getDataValue('createdAt');
+        let fineCalc = 0;
+        if (createdAt) {
+          const returningTime = new Date();
+          const periodDate = Math.floor((returningTime - createdAt) / (1000 * 60 * 60 * 24));  // Calculate the period in days
+    
+          if (periodDate > 5) {
+            fineCalc = 5 * (periodDate - 5);  // Fine for days beyond 5 days
+          }
+        }
+        return Math.floor(fineCalc);   // Return the calculated fine
+      }
     }
   },{
     timestamps: true

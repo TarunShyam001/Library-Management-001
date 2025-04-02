@@ -15,6 +15,7 @@ const cors = require("cors");
 const Users = require ('./models/users');
 const Books = require('./models/books');
 const Students = require('./models/students');
+const Fine = require('./models/fine');
 const ForgetPassword = require('./models/forget');
 
 const userRoutes = require('./routes/users');
@@ -25,14 +26,11 @@ const forgetRoutes = require('./routes/forget');
 app.use(express.json());
 app.use(cors());
 
-Users.hasMany(Students);
-Students.belongsTo(Users);
-
-// Users.hasMany(Students);
-// Students.belongsTo(Users);
-
 Users.hasMany(ForgetPassword);
 ForgetPassword.belongsTo(Users);
+
+Books.hasMany(Students);
+Students.belongsTo(Books);
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags : 'a'});
 
@@ -48,7 +46,7 @@ const port = process.env.PORT;
 // {force : true}
 
 sequelize
-.sync({force : true})
+.sync()
 .then(() => {
     console.log(`server is working on http://localhost:${port}`);
     app.listen(port);

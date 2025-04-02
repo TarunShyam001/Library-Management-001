@@ -2,18 +2,18 @@ const path = require('path');
 
 const express = require('express');
 
-// const studentController = require('../controllers/students');
+const studentController = require('../controllers/students');
 
 const router = express.Router();
 
-// router.get('/manage-students', studentController.getStudents)
+router.get('/get-data', studentController.getStudents);
 
-// router.get('/manage-students', studentController.getAddBookInfo);
+router.get('/get-fine-data',studentController.getFineInfo);
 
-// router.post('/manage-students', studentController.postAddBookInfo);
+router.get('/dashboard', studentController.getInfo);
 
-// router.get('/manage-students', studentController.getreturnBookInfo);
+router.post('/add-data', studentController.postAddBookInfo);
 
-// router.post('/manage-students', studentController.postreturnBookInfo);
+router.post('/delete-data/:studentId', studentController.postreturnBookInfo);
 
 module.exports = router;

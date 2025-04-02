@@ -45,10 +45,10 @@
         <!-- Left Section -->
         <aside class="left-section" id="left">
             <ul class="nav-links" id="navLinks">
-                <li><a href="../dashboard/home.html" onclick="showDashboard()"> Dashboard </a></li>
-                <li><a href="../books/books.html" onclick="manageBooks()"> Manage Books </a></li>
-                <li><a href="../students/students.html" onclick="manageStudents()" class="active">Manage Students</a></li>
-                <li><a href="../fine/fine-details.html" onclick="fineCollected()">Fine Collected</a></li>
+                <li><a href="../dashboard/home.html"> Dashboard </a></li>
+                <li><a href="../books/books.html"> Manage Books </a></li>
+                <li><a href="../students/students.html" class="active">Manage Students</a></li>
+                <li><a href="../fine/fine-details.html">Fine Collected</a></li>
             </ul>
         </aside>
 
@@ -60,7 +60,7 @@
                 <!-- Search for stack/book-code/name -->
                 <div class="controls">
                     <label for="search-input">Search for the student:</label>
-                    <input type="text" id="search-input" placeholder="Search by Roll-Code or Name" oninput="filterRecords()">
+                    <input type="text" id="search-input" placeholder="Search by Roll-Code or Name" oninput="filterData()">
                 </div>
         
                 <!-- Items Per Page Dropdown -->
@@ -74,7 +74,7 @@
                 </div>
         
                 <!-- Book Table -->
-                <table id="books-table">
+                <table id="records-table">
                     <thead>
                         <tr>
                             <th>Student Id</th>
@@ -125,18 +125,16 @@
                                 <label for="book-name"> Book-Name : </label>
                                 <input type="text" name="book-name" id="book-name">
                             </div>
-                            <div><button class="check" onclick="BookCheck()"> Check </button></div>
                         </div>
-                        
                         <br>
-                        
                         <button class="add-record-btn" type="submit"> Add New Record </button>
                     </form>
                 </div>
             </div>
         </section>
     </div>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
     <script src="students.js"></script>
 </body>
 </html>

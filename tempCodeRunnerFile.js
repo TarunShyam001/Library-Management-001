@@ -1,2 +1,1 @@
-
-// Students.belongsTo(Users);
+/manage-students

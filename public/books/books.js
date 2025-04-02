@@ -1,30 +1,92 @@
-// Sample data for books
-const books = [
-    { id: 1, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', year: '1925', stack: 'A1', availability: 'Available' },
-    { id: 2, title: '1984', author: 'George Orwell', year: '1949', stack: 'B2', availability: 'Checked Out' },
-    { id: 3, title: 'To Kill a Mockingbird', author: 'Harper Lee', year: '1960', stack: 'C3', availability: 'Available' },
-    { id: 4, title: 'The Catcher in the Rye', author: 'J.D. Salinger', year: '1951', stack: 'D4', availability: 'Available' },
-    { id: 5, title: 'Moby-Dick', author: 'Herman Melville', year: '1851', stack: 'E5', availability: 'Checked Out' },
-    { id: 6, title: 'War and Peace', author: 'Leo Tolstoy', year: '1869', stack: 'F6', availability: 'Available' },
-    { id: 7, title: 'Pride and Prejudice', author: 'Jane Austen', year: '1813', stack: 'G7', availability: 'Checked Out' },
-    { id: 8, title: 'The Odyssey', author: 'Homer', year: '8th century BC', stack: 'H8', availability: 'Available' },
-    { id: 9, title: 'The Divine Comedy', author: 'Dante Alighieri', year: '1320', stack: 'I9', availability: 'Available' },
-    { id: 10, title: 'Ulysses', author: 'James Joyce', year: '1922', stack: 'J10', availability: 'Checked Out' },
-    { id: 11, title: 'Don Quixote', author: 'Miguel de Cervantes', year: '1605', stack: 'K11', availability: 'Available' },
-    { id: 12, title: 'The Brothers Karamazov', author: 'Fyodor Dostoevsky', year: '1880', stack: 'L12', availability: 'Available' },
-    { id: 13, title: 'Brave New World', author: 'Aldous Huxley', year: '1932', stack: 'M13', availability: 'Checked Out' },
-    { id: 14, title: 'Crime and Punishment', author: 'Fyodor Dostoevsky', year: '1866', stack: 'N14', availability: 'Available' },
-    { id: 15, title: 'Frankenstein', author: 'Mary Shelley', year: '1818', stack: 'O15', availability: 'Checked Out' },
-    { id: 16, title: 'Anna Karenina', author: 'Leo Tolstoy', year: '1878', stack: 'P16', availability: 'Available' },
-];
+const bookForm = document.querySelector(".book-info-form");
+const port = 3376;
 
 // Pagination variables
 let currentPage = 1;
 let itemsPerPage = 5; // default items per page
-let filteredBooks = [...books]; // Keep track of the filtered books
+let listOfBooks = [];
+let filteredBooks = []; // Keep track of the filtered books
+
+document.addEventListener('DOMContentLoaded', async (event) => {
+    event.preventDefault();
+    try {
+        const token = localStorage.getItem('token');
+        // console.log(token);
+        if(!token) {
+            window.location.href = '../login/login.html';
+        }
+
+        const decodeToken = parseJwt(token);
+        // console.log(decodeToken);
+        const isAdmin = decodeToken.isAdmin;
+        if(!isAdmin) {
+            window.location.href = '../login/login.html';
+        }
+
+        await getBooks();
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
+async function getBooks() {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await axios.get(`http://localhost:${port}/books/get-books`);
+        listOfBooks = response.data;
+
+        console.log("API Response:", response.data);
+
+        filteredBooks = [...listOfBooks];
+
+        await renderTable();
+    } catch (err) {
+        console.log('Error on fetching data : ', err);
+    }
+}
+
+
+bookForm.addEventListener('submit', async(event) => {
+    event.preventDefault();
+    const bookDetails = {
+        bookId:document.getElementById('book-code').value, 
+        title: document.getElementById('book-title').value,
+        author: document.getElementById('book-author').value,
+        year: document.getElementById('pub-year').value,
+        stack: document.getElementById('stack').value
+    };
+  
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.post(`http://localhost:${port}/books/add-books`, bookDetails);
+
+        alert(response.data.message); // Check the structure of the returned data
+        // Refresh the expense list
+        await getBooks();
+
+        document.getElementById('book-code').value = "";
+        document.getElementById('book-title').value = "";
+        document.getElementById('book-author').value = "";
+        document.getElementById('pub-year').value = "";
+        document.getElementById('stack').value = "";
+    } catch (err) {
+        if (err.response && err.response.status === 401) {
+            alert(err.response.data.message); // Show alert when book already exists
+            
+            document.getElementById('book-code').value = "";
+            document.getElementById('book-title').value = "";
+            document.getElementById('book-author').value = "";
+            document.getElementById('pub-year').value = "";
+            document.getElementById('stack').value = "";
+        } else {
+            console.log(err);
+        }
+    }
+});
 
 // Function to render the books in the table
-function renderTable() {
+async function renderTable() {
     const bookTableBody = document.getElementById('book-table-body');
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -35,12 +97,12 @@ function renderTable() {
     booksToDisplay.forEach(book => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${book.id}</td>
+            <td>${book.bookId}</td>
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.year}</td>
             <td>${book.stack}</td>
-            <td>${book.availability}</td>
+            <td>${book.availability ? "Available" : "Issued"}</td>
         `;
         bookTableBody.appendChild(row);
     });
@@ -53,6 +115,17 @@ function renderTable() {
     document.getElementById('next-btn').disabled = currentPage * itemsPerPage >= filteredBooks.length;
 }
 
+// parse the json-web-tokens
+function parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+}
+
 // Function to change the page
 function changePage(direction) {
     currentPage += direction;
@@ -63,13 +136,17 @@ function changePage(direction) {
 function filterBooks() {
     const searchInput = document.getElementById('search-input').value.toLowerCase();
     
-    filteredBooks = books.filter(book => {
-        return (
-            book.id.toString().includes(searchInput) ||
-            book.title.toLowerCase().includes(searchInput) ||
-            book.stack.toLowerCase().includes(searchInput)
-        );
-    });
+    if (searchInput === "") {
+        filteredBooks = [...listOfBooks]; // Restore original list when search input is empty
+    } else {
+        filteredBooks = listOfBooks.filter(book => {
+            return (
+                book.bookId.toString().includes(searchInput) ||
+                book.title.toLowerCase().includes(searchInput) ||
+                book.stack.toLowerCase().includes(searchInput)
+            );
+        });
+    }
 
     // Reset to first page after filtering
     currentPage = 1;
@@ -77,6 +154,7 @@ function filterBooks() {
     // Render the table with the filtered data
     renderTable();
 }
+
 
 // Function to handle items per page change
 document.getElementById('items-per-page').addEventListener('change', function () {
