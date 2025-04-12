@@ -16,12 +16,14 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             window.location.href = '../login/login.html';
         }
 
-        const decodeToken = parseJwt(token);
+        const decodeToken = await parseJwt(token);
         // console.log(decodeToken);
         const isAdmin = decodeToken.isAdmin;
         if(!isAdmin) {
-            window.location.href = '../login/login.html';
+            window.location.href = '../student-home/home.html';
         }
+
+        document.getElementById('user-id').innerText = `${decodeToken.userName}`;
 
         await getBooks();
     } catch (err) {
@@ -116,14 +118,18 @@ async function renderTable() {
 }
 
 // parse the json-web-tokens
-function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+async function parseJwt(token) {
+    try {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
 
-    return JSON.parse(jsonPayload);
+        return JSON.parse(jsonPayload);
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 // Function to change the page

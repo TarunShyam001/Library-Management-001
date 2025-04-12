@@ -75,7 +75,10 @@ button:hover {
 .toggle-text {
     margin-top: 10px;
     font-size: 14px;
-    color: #fff; /* White text */
+    display: flex;
+    justify-content: space-between; /* Places the links at opposite ends */
+    color: #fff;
+    padding: 0 5px;
 }
 
 .toggle-text a {
@@ -87,4 +90,6 @@ button:hover {
 
 .toggle-text a:hover {
     text-decoration: underline;
+    color: red;
 }
+

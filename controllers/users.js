@@ -9,7 +9,7 @@ function isPasswordValid(str) {
 }
 
 const postAddUsers = async (req, res) => {
-  const {username, regId, email, password} = req.body; 
+  const {username, regId, email, password, confirmPassword} = req.body; 
   console.log('Received Data'+ req.body);
   try {
     const existingUser = await Users.findOne({where : {email}});
@@ -25,8 +25,11 @@ const postAddUsers = async (req, res) => {
         return res.status(404).json({ message: 'A password must have atleast one lower case, one higher case, and one digit (No other characters)' });
       }
     } 
+    if(password !== confirmPassword) {
+      return res.status(401).json({ message: "Both Password Is'nt Same, Please Try Again" });
+    }
 
-    let isAdmin = String(regId).length !== 6;
+    let isAdmin = regId === 100145612;
 
     const saltrounds = 10;
     const hash = await bcrypt.hash(password, saltrounds);
@@ -39,9 +42,9 @@ const postAddUsers = async (req, res) => {
   }
 };
 
-function generateAccessToken(id, regId, name, isAdmin) {
+function generateAccessToken(id, regId, username, isAdmin) {
   const secretKey = process.env.TOKEN_SECRET;
-  return jwt.sign({ userId : id, userName : name, userRegId : regId, isAdmin: isAdmin}, secretKey)
+  return jwt.sign({ userId : id, userRegId : regId, userName : username, isAdmin: isAdmin}, secretKey)
 }
 
 const postAddLogin = async (req, res) => {
@@ -56,6 +59,7 @@ const postAddLogin = async (req, res) => {
         return res.status(200).json({ 
           success : true, 
           message: 'Login Successfully', 
+          isAdmin: user.isAdmin,
           token : generateAccessToken(user.id, user.regId, user.username, user.isAdmin)
         });
       } else {

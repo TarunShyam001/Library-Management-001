@@ -28,6 +28,34 @@ exports.getFineInfo = async (req, res) => {
     }
 }
 
+exports.getBooksInfo = async (req, res) => {
+    try{
+        const userRegId = req.user.regId;
+        const student = await Students.findAll({ where: { rollCode: userRegId } });
+        console.log(student);
+
+        return res.status(200).json(student);
+    } catch (err) {
+        console.log("Error in getBooksInfo:", err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
+
+exports.getStudFineInfo = async (req, res) => {
+    try{
+        const userRegId = req.user.regId;
+        const student = await Fines.findAll({ where: { rollCode: userRegId } });
+        
+        let totalFine = student.reduce((sum, data) => sum + data.fine, 0); 
+
+        return res.status(200).json(totalFine); 
+        
+    } catch (err) {
+        console.log("Error in getBooksInfo:", err);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
+
 exports.getInfo = async (req, res) => {
     try {
         let totalBooksData = await Books.count();

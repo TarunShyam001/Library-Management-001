@@ -1,0 +1,78 @@
+/* Container (Issued Books Section) */
+.container {
+    max-width: 900px;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Fine Page Section */
+#fine-page {
+    max-width: 900px;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex; /* Hide initially */
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Page Title */
+.page-title,
+#fine-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Fine Header */
+#fine-header {
+    font-size: 20px;
+    color: #d63031;
+}
+
+/* Book Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #0073e6;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive Design */
+@media (max-width: 868px) {
+    .container, #fine-page {
+        padding: 15px;
+    }
+
+    .page-title,
+    #fine-title,
+    #fine-header {
+        font-size: 20px;
+    }
+}

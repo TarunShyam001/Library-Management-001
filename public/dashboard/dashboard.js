@@ -14,11 +14,15 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
         const decodeToken = parseJwt(token);
         const isAdmin = decodeToken.isAdmin;
+        const username = decodeToken.userName;
         if(!isAdmin) {
-            window.location.href = '../login/login.html';
+            window.location.href = '../student-home/home.html';
         }
 
+        document.getElementById('user-id').innerText = `${username}`;
+        
         await getDashboard();
+        
     } catch (err) {
         console.log(err);
     }

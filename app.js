@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 // dotenv.config(); // when running the app via "npm start" 
-dotenv.config({path : './Library-Management-API/.env'}); // when running with simple "run command"
+dotenv.config({path : './Library-Management-001/.env'}); // when running with simple "run command"
 // console.log(dotenv);
 
 const path = require('path');

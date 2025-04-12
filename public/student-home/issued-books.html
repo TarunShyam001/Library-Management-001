@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="../navigation.css">
+    <link rel="stylesheet" href="issued-books.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <a href="../student-home/home.html"><img src="https://cdn-icons-png.flaticon.com/512/2421/2421066.png" alt="Library Logo" class="logo"></a>
+            <h1>Library Management</h1>
+            <div class="menu-btn" onclick="toggleMenu()">☰</div>
+        </div>
+        <div class="user-info" id="user-info">
+            <span id="user-id" onclick="toggleUserMenu()">User123</span>
+            <div id="user-menu" class="user-menu">
+                <ul>
+                    <li><a href="../student-home/home.html" onclick="showProfile()">Profile</a></li>
+                    <li><a href="../login/login.html" onclick="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        function toggleMenu() {
+            const leftSection = document.getElementById('left');
+            leftSection.classList.toggle('active'); // Use 'active' class to control visibility
+        }
+
+        // Toggle User Menu
+        function toggleUserMenu() {
+            const menu = document.getElementById('user-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+    <!-- Main Section -->
+    <div class="main-container">
+        <!-- Left Section -->
+        <aside class="left-section" id="left">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" id="issued-link" class="active"> Issued Books </a></li>
+                <li><a href="../student-home/fine.html" id="fine-link"> Total Fine Paid </a></li>
+            </ul>
+        
+        </aside>
+
+        <!-- Right Section (Dynamic content) -->
+        <section class="right-section" id="right-section">
+            <div class="container">
+                <h1 id="page-title"><span id="issued-books"> Issued Books Data : </span></h1>
+        
+                <!-- Book Table -->
+                <table id="issued-books-table">
+                    <thead>
+                        <tr>
+                            <th> Book-Code </th>
+                            <th> Book-Title </th>
+                            <th> Date of Book-Return </th>
+                            <th> Fine-Generted </th>
+                        </tr>
+                    </thead>
+                    <tbody id="issued-table-body">
+                        <!-- Rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+    <script src="issued-books.js"></script>
+</body>
+</html>

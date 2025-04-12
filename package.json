@@ -1,26 +1,23 @@
 {
-  "name": "library-management-api",
+  "name": "library-management-001",
   "version": "1.0.0",
   "description": "An API that stores all the information of the books collection inside the library and handle the student informations",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "TarunShyam",
+  "author": "Tarun Shyam",
   "license": "ISC",
   "devDependencies": {
-    "nodeman": "^1.1.2"
-  },
-  "dependencies": {
+    "@getbrevo/brevo": "^2.2.0",
     "bcrypt": "^5.1.1",
-    "body-parser": "^1.20.3",
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "mysql2": "^3.14.0",
-    "sequelize": "^6.37.6"
+    "nodemon": "^3.1.9",
+    "sequelize": "^6.37.7"
   }
 }
