@@ -7,13 +7,15 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             window.location.href = '../login/login.html';
         }
 
-        const decodeToken = parseJwt(token);
+        const decodeToken = await parseJwt(token);
         const isAdmin = decodeToken.isAdmin;
         const username = decodeToken.userName;
         if(!isAdmin) {
             window.location.href = '../student-home/home.html';
         }
         document.getElementById('user-id').innerText = `${username}`;
+
+        document.getElementById('username').innerText = `${username}`;
 
     } catch (err) {
         console.log(err);
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
 
 // parse the json-web-tokens
-function parseJwt(token) {
+async function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {

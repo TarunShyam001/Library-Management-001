@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         }
         
         document.getElementById('user-id').innerText = `${decodeToken.userName}`;
+        document.getElementById('username').innerText = `${decodeToken.userName}`;
 
     } catch (err) {
         console.log(err);
