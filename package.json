@@ -4,6 +4,7 @@
   "description": "An API that stores all the information of the books collection inside the library and handle the student informations",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tarun Shyam",
@@ -19,5 +20,8 @@
     "mysql2": "^3.14.0",
     "nodemon": "^3.1.9",
     "sequelize": "^6.37.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
   }
 }
