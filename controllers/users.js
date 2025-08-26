@@ -29,7 +29,7 @@ const postAddUsers = async (req, res) => {
       return res.status(401).json({ message: "Both Password Is'nt Same, Please Try Again" });
     }
 
-    let isAdmin = regId === 100145612;
+    let isAdmin = regId == 100145612;
 
     const saltrounds = 10;
     const hash = await bcrypt.hash(password, saltrounds);
